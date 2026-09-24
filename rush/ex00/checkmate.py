@@ -12,11 +12,14 @@ def checkmate(board):
             print("Error: Board must be a square.")
             return
 
-    for row in rows:
-        for piece in row:
-            if piece not in ".KQRPB":
-                print("Error: Invalid character on board.")
-                return
+    for r in range(size):
+        row = list(rows[r])
+
+        for c in range(size):
+            if row[c] not in ".KPBRQ":
+                row[c] = "."
+
+        rows[r] = "".join(row)
 
     king_row = -1
     king_col = -1
@@ -60,6 +63,7 @@ def checkmate(board):
         c = king_col + dc
 
         while 0 <= r < size and 0 <= c < size:
+
             piece = rows[r][c]
             if piece != ".":
                 if piece == "B" or piece == "Q":
